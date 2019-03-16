@@ -13,9 +13,19 @@
 
 ## Install
 
+* Install python dependencies
 ```bash
 pip install -r requirements.txt
+```
+
+* Create database and table using dummy data
+```bash
 python3 migrations.py
+```
+
+* For managing sqlite db
+```bash
+sudo apt install sqliteman sqlite3
 ```
 ## Run
 
