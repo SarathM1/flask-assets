@@ -1,6 +1,25 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, DateField
+from wtforms import StringField, IntegerField, DateField, SelectField, Form
 from wtforms.validators import DataRequired, Email, Length, optional
+
+
+class AssetSearchForm(Form):
+    choices = [('name', 'name'),
+               ('emp_no', 'emp_no'),
+               ('location', 'location'),
+               ('sl_no_1', 'sl_no_1'),
+               ('model', 'model'),
+               ('make', 'make'),
+               ('tel_tvm', 'tel_tvm'),
+               ('test_pc', 'test_pc'),
+               ('processor', 'processor'),
+               ('ram', 'ram'),
+               ('hdd', 'hdd'),
+               ('asset_no', 'asset_no'),
+               ('project_name', 'project_name'),
+               ('won_no', 'won_no')]
+    select = SelectField('Search for:', choices=choices)
+    search = StringField('')
 
 
 class ContactForm(FlaskForm):

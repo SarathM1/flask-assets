@@ -1,0 +1,9 @@
+{% extends 'layouts/master.html' %}
+{% block title %}Filter{% endblock %}
+{% block body %}
+<h1>Filter Database</h1>
+<form action="{{ url_for('filter') }}" method="post">
+    {{ generate_fields(form) }}
+    <input type="submit" class="btn btn-success" value="Query">
+</form>
+{% endblock %}

@@ -1,6 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request, flash
 from models import db, Asset
-from forms import ContactForm
+from forms import ContactForm, AssetSearchForm
 
 # Flask
 app = Flask(__name__)
@@ -20,6 +20,34 @@ def index():
     Home page
     '''
     return redirect(url_for('contacts'))
+
+
+@app.route('/filter', methods=['GET', 'POST'])
+def filter():
+    search = AssetSearchForm(request.form)
+    if request.method == 'POST':
+        # return search_results(search)
+        pass
+    return render_template('web/filter.html', form=search)
+
+
+# @app.route('/results')
+# def search_results(search):
+#     results = []
+#     search_string = search.data['search']
+#
+#     if search.data['search'] == '':
+#         qry = db_session.query(Album)
+#         results = qry.all()
+#
+#     if not results:
+#         flash('No results found!')
+#         return redirect('/')
+#     else:
+#         # display results
+#         table = Results(results)
+#         table.border = True
+#         return render_template('results.html', table=table)
 
 
 @app.route("/new_contact", methods=('GET', 'POST'))
