@@ -87,18 +87,6 @@ def contacts():
     return render_template('web/contacts.html', rows=rows, search_form=search_form)
 
 
-# @app.route("/search")
-# def search():
-#     '''
-#     Search
-#     '''
-#     name_search = request.args.get('name')
-#     rows = Asset.query.filter(
-#         Asset.name.contains(name_search)
-#     ).order_by(Asset.name).all()
-#     return render_template('web/contacts.html', rows=rows)
-#
-
 @app.route("/contacts/delete", methods=('POST',))
 def contacts_delete():
     '''
