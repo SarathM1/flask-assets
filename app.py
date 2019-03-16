@@ -1,5 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request, flash
-from models import db, Contact
+from models import db, Asset
 from forms import ContactForm
 
 # Flask
@@ -8,8 +8,8 @@ app.config['SECRET_KEY'] = 'my secret'
 app.config['DEBUG'] = False
 
 # Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///book.sqlite'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/book'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///it_store.sqlite'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/it_store'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
@@ -29,13 +29,13 @@ def new_contact():
     '''
     form = ContactForm()
     if form.validate_on_submit():
-        my_contact = Contact()
+        my_contact = Asset()
         form.populate_obj(my_contact)
         db.session.add(my_contact)
         try:
             db.session.commit()
             # User info
-            flash('Contact created correctly', 'success')
+            flash('Asset created correctly', 'success')
             return redirect(url_for('contacts'))
         except:
             db.session.rollback()
@@ -51,7 +51,7 @@ def edit_contact(id):
 
     :param id: Id from contact
     '''
-    my_contact = Contact.query.filter_by(id=id).first()
+    my_contact = Asset.query.filter_by(id=id).first()
     form = ContactForm(obj=my_contact)
     if form.validate_on_submit():
         try:
@@ -74,8 +74,8 @@ def contacts():
     '''
     Show alls contacts
     '''
-    contacts = Contact.query.order_by(Contact.name).all()
-    return render_template('web/contacts.html', contacts=contacts)
+    rows = Asset.query.order_by(Asset.name).all()
+    return render_template('web/contacts.html', rows=rows)
 
 
 @app.route("/search")
@@ -84,9 +84,9 @@ def search():
     Search
     '''
     name_search = request.args.get('name')
-    all_contacts = Contact.query.filter(
-        Contact.name.contains(name_search)
-        ).order_by(Contact.name).all()
+    all_contacts = Asset.query.filter(
+        Asset.name.contains(name_search)
+    ).order_by(Asset.name).all()
     return render_template('web/contacts.html', contacts=all_contacts)
 
 
@@ -96,7 +96,7 @@ def contacts_delete():
     Delete contact
     '''
     try:
-        mi_contacto = Contact.query.filter_by(id=request.form['id']).first()
+        mi_contacto = Asset.query.filter_by(id=request.form['id']).first()
         db.session.delete(mi_contacto)
         db.session.commit()
         flash('Delete successfully.', 'danger')
@@ -108,4 +108,4 @@ def contacts_delete():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", debug=True)

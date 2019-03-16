@@ -2,30 +2,57 @@
 {% block title %}View{% endblock %}
 {% block body %}
 <h1>Contacts</h1>
-<table class="table table-hover">
+{# <table class="table table-hover"> #}
+<table class="table-hover table-condensed">
 	<thead>
 		<tr>
-			<th scope="col">Name</th>
-			<th scope="col">Surname</th>
-			<th scope="col">E-Mail</th>
-			<th scope="col">Phone</th>
+            <th scope="col">name</th>
+            <th scope="col">emp_no</th>
+            <th scope="col">location</th>
+            <th scope="col">seat_no</th>
+            <th scope="col">sl_no_1</th>
+            <th scope="col">model</th>
+            <th scope="col">make</th>
+            <th scope="col">tel_tvm</th>
+            <th scope="col">test_pc</th>
+            <th scope="col">processor</th>
+            <th scope="col">ram</th>
+            <th scope="col">hdd</th>
+            <th scope="col">asset_no</th>
+            <th scope="col">allocation_date</th>
+            <th scope="col">project_name</th>
+            <th scope="col">won_no</th>
+            <th scope="col">end_date</th>
 			<td></td>
 		</tr>
 	</thead>
 	<tbody>
-	{% for contact in contacts %}
+	{% for row in rows %}
 		<tr>
-			<td>{{ contact.name }}</td>
-			<td>{{ contact.surname }}</td>
-			<td>{{ contact.email }}</td>
-			<td>{{ contact.phone }}</td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.emp_no }}</td>
+            <td>{{ row.location }}</td>
+            <td>{{ row.seat_no }}</td>
+            <td>{{ row.sl_no_1 }}</td>
+            <td>{{ row.model }}</td>
+            <td>{{ row.make }}</td>
+            <td>{{ row.tel_tvm }}</td>
+            <td>{{ row.test_pc }}</td>
+            <td>{{ row.processor }}</td>
+            <td>{{ row.ram }}</td>
+            <td>{{ row.hdd }}</td>
+            <td>{{ row.asset_no }}</td>
+            <td>{{ row.allocation_date }}</td>
+            <td>{{ row.project_name }}</td>
+            <td>{{ row.won_no }}</td>
+            <td>{{ row.end_date }}</td>
 			<td class="text-right">
 				<div class="row">
 					<form action="{{ url_for('contacts_delete') }}" method="post" class="pull-right">
-						<input type="hidden" name="id" value="{{ contact.id }}">
-						<input type="submit" class="btn btn-danger" data-toggle="confirmation" {# data-title="¿Estas seguro?" #} value="Delete">
+						<input type="hidden" name="id" value="{{ row.id }}">
+						<input type="submit" class="btn btn-danger" data-toggle="confirmation" value="Delete">
 					</form>
-					<a class="btn btn-primary pull-right" href="{{ url_for('edit_contact', id=contact.id) }}">Edit</a>
+					<a class="btn btn-primary pull-right" href="{{ url_for('edit_contact', id=row.id) }}">Edit</a>
 				</div>
 			</td>
 		</tr>
