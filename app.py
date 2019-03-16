@@ -25,7 +25,7 @@ def index():
 @app.route("/new_contact", methods=('GET', 'POST'))
 def new_contact():
     '''
-    Create new contact
+    Create new asset
     '''
     form = ContactForm()
     if form.validate_on_submit():
@@ -39,7 +39,7 @@ def new_contact():
             return redirect(url_for('contacts'))
         except:
             db.session.rollback()
-            flash('Error generating contact.', 'danger')
+            flash('Error generating asset.', 'danger')
 
     return render_template('web/new_contact.html', form=form)
 
@@ -47,15 +47,15 @@ def new_contact():
 @app.route("/edit_contact/<id>", methods=('GET', 'POST'))
 def edit_contact(id):
     '''
-    Edit contact
+    Edit asset
 
-    :param id: Id from contact
+    :param id: Id from asset
     '''
     my_contact = Asset.query.filter_by(id=id).first()
     form = ContactForm(obj=my_contact)
     if form.validate_on_submit():
         try:
-            # Update contact
+            # Update asset
             form.populate_obj(my_contact)
             db.session.add(my_contact)
             db.session.commit()
@@ -63,7 +63,7 @@ def edit_contact(id):
             flash('Saved successfully', 'success')
         except:
             db.session.rollback()
-            flash('Error update contact.', 'danger')
+            flash('Error update asset.', 'danger')
     return render_template(
         'web/edit_contact.html',
         form=form)
@@ -72,7 +72,7 @@ def edit_contact(id):
 @app.route("/contacts")
 def contacts():
     '''
-    Show alls contacts
+    Show alls assets
     '''
     rows = Asset.query.order_by(Asset.name).all()
     return render_template('web/contacts.html', rows=rows)
@@ -93,7 +93,7 @@ def search():
 @app.route("/contacts/delete", methods=('POST',))
 def contacts_delete():
     '''
-    Delete contact
+    Delete asset
     '''
     try:
         mi_contacto = Asset.query.filter_by(id=request.form['id']).first()
@@ -102,7 +102,7 @@ def contacts_delete():
         flash('Deleted successfully.', 'danger')
     except:
         db.session.rollback()
-        flash('Error deleting  contact.', 'danger')
+        flash('Error deleting  asset.', 'danger')
 
     return redirect(url_for('contacts'))
 
