@@ -99,10 +99,10 @@ def contacts_delete():
         mi_contacto = Asset.query.filter_by(id=request.form['id']).first()
         db.session.delete(mi_contacto)
         db.session.commit()
-        flash('Delete successfully.', 'danger')
+        flash('Deleted successfully.', 'danger')
     except:
         db.session.rollback()
-        flash('Error delete  contact.', 'danger')
+        flash('Error deleting  contact.', 'danger')
 
     return redirect(url_for('contacts'))
 
