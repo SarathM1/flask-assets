@@ -84,10 +84,11 @@ def search():
     Search
     '''
     name_search = request.args.get('name')
-    all_contacts = Asset.query.filter(
+    rows = Asset.query.filter(
         Asset.name.contains(name_search)
     ).order_by(Asset.name).all()
-    return render_template('web/contacts.html', contacts=all_contacts)
+    print(rows)
+    return render_template('web/contacts.html', rows=rows)
 
 
 @app.route("/contacts/delete", methods=('POST',))

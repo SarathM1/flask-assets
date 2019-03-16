@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{% block title %}{% endblock %} | Contacts Flask </title>
+	<title>{% block title %}{% endblock %} | IT Tool </title>
 	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
   </head>
@@ -19,7 +19,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		  </button>
-		  <a class="navbar-brand" href="/">Contact Manager</a>
+		  <a class="navbar-brand" href="/">Asset Manager</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<form action="{{ url_for('search') }}" method="get" class="navbar-form navbar-left">
@@ -30,7 +30,7 @@
 		  </form>
 		  <ul class="nav navbar-nav navbar-right">
 			  <li><a href="{{ url_for('new_contact') }}">New</a></li>
-			  <li><a href="{{ url_for('contacts') }}">View contacts</a></li>
+			  <li><a href="{{ url_for('contacts') }}">View Assets</a></li>
 		  </ul>
 		</div>
 	  </div>
