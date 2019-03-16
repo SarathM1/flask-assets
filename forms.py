@@ -28,11 +28,9 @@ class ContactForm(FlaskForm):
         min=-1, max=80, message='length must be less than 80 chars')])
     asset_no = StringField('asset_no', validators=[DataRequired(), Length(
         min=-1, max=80, message='length must be less than 80 chars')])
-    allocation_date = StringField('allocation_date', validators=[DataRequired(
-    ), Length(min=-1, max=80, message='length must be less than 80 chars')])
+    allocation_date = DateField('allocation_date', validators=[DataRequired()])
     project_name = StringField('project_name', validators=[optional(), Length(
         min=-1, max=80, message='length must be less than 80 chars')])
     won_no = StringField('won_no', validators=[optional(), Length(
         min=-1, max=80, message='length must be less than 80 chars')])
-    end_date = StringField('end_date', validators=[DataRequired(), Length(
-        min=-1, max=80, message='length must be less than 80 chars')])
+    end_date = DateField('end_date', validators=[DataRequired()])

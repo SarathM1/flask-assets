@@ -7,6 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///it_store.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
 class Asset(db.Model):
     __tablename__ = 'asset_record'
 
@@ -24,10 +25,10 @@ class Asset(db.Model):
     ram = db.Column(db.String(20), nullable=True, unique=False)
     hdd = db.Column(db.String(20), nullable=True, unique=False)
     asset_no = db.Column(db.String(20), nullable=True, unique=False)
-    allocation_date = db.Column(db.String(20), nullable=True, unique=False)
+    allocation_date = db.Column(db.Date(), nullable=False, unique=False)
     project_name = db.Column(db.String(20), nullable=True, unique=False)
     won_no = db.Column(db.String(20), nullable=True, unique=False)
-    end_date = db.Column(db.String(20), nullable=True, unique=False)
+    end_date = db.Column(db.Date(), nullable=True, unique=False)
 
     def __repr__(self):
         return '<Contacts %r>' % self.name
