@@ -8,6 +8,7 @@
         Query
     </button>
 </form>
+{% if rows%}
 <table class="table-hover table-bordered table-condensed">
     <thead>
         <tr>
@@ -68,4 +69,5 @@
         {% endfor %}
     </tbody>
 </table>
+{%endif%}
 {% endblock %}

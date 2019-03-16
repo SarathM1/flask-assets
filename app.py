@@ -69,22 +69,72 @@ def edit_contact(id):
         form=form)
 
 
+def query_db(search_str, search_field):
+    if search_field == 'name':
+        results = Asset.query.filter(Asset.name.contains(
+            search_str)).order_by(Asset.name).all()
+    elif search_field == 'emp_no':
+        results = Asset.query.filter(Asset.emp_no.contains(
+            search_str)).order_by(Asset.emp_no).all()
+    elif search_field == 'location':
+        results = Asset.query.filter(Asset.location.contains(
+            search_str)).order_by(Asset.location).all()
+    elif search_field == 'sl_no_1':
+        results = Asset.query.filter(Asset.sl_no_1.contains(
+            search_str)).order_by(Asset.sl_no_1).all()
+    elif search_field == 'model':
+        results = Asset.query.filter(Asset.model.contains(
+            search_str)).order_by(Asset.model).all()
+    elif search_field == 'make':
+        results = Asset.query.filter(Asset.make.contains(
+            search_str)).order_by(Asset.make).all()
+    elif search_field == 'tel_tvm':
+        results = Asset.query.filter(Asset.tel_tvm.contains(
+            search_str)).order_by(Asset.tel_tvm).all()
+    elif search_field == 'test_pc':
+        results = Asset.query.filter(Asset.test_pc.contains(
+            search_str)).order_by(Asset.test_pc).all()
+    elif search_field == 'processor':
+        results = Asset.query.filter(Asset.processor.contains(
+            search_str)).order_by(Asset.processor).all()
+    elif search_field == 'ram':
+        results = Asset.query.filter(Asset.ram.contains(
+            search_str)).order_by(Asset.ram).all()
+    elif search_field == 'hdd':
+        results = Asset.query.filter(Asset.hdd.contains(
+            search_str)).order_by(Asset.hdd).all()
+    elif search_field == 'asset_no':
+        results = Asset.query.filter(Asset.asset_no.contains(
+            search_str)).order_by(Asset.asset_no).all()
+    elif search_field == 'project_name':
+        results = Asset.query.filter(Asset.project_name.contains(
+            search_str)).order_by(Asset.project_name).all()
+    elif search_field == 'won_no':
+        results = Asset.query.filter(Asset.won_no.contains(
+            search_str)).order_by(Asset.won_no).all()
+    else:
+        results = None
+    return results
+
+
 @app.route("/contacts", methods=['GET', 'POST'])
 def contacts():
     '''
     Show alls assets
     '''
-    rows = Asset.query.order_by(Asset.name).all()
     search_form = AssetSearchForm(request.form)
     search_str = request.args.get('search')
     search_field = request.args.get('select')
-    if search_field:
-        print(search_str, search_field)
-        if search_field == 'emp_no':
-            rows = Asset.query.filter(Asset.emp_no.contains(
-                search_str)).order_by(Asset.emp_no).all()
-        return render_template('web/contacts.html', rows=rows, search_form=search_form)
-    return render_template('web/contacts.html', rows=rows, search_form=search_form)
+    if search_str:
+        results = query_db(search_str, search_field)
+        flash('{} results found'.format(len(results)))
+        if not results:
+            flash('No results found')
+        return render_template('web/contacts.html', rows=results, search_form=search_form)
+    else:
+        # If 'search' field is empty, return all results
+        results = Asset.query.order_by(Asset.name).all()
+    return render_template('web/contacts.html', rows=results, search_form=search_form)
 
 
 @app.route("/contacts/delete", methods=('POST',))
