@@ -2,6 +2,12 @@
 {% block title %}View{% endblock %}
 {% block body %}
 <h1>Assets</h1>
+<form method="get">
+    {{ generate_fields(search_form) }}
+    <button type="submit" class="btn btn-default" value="Query" method="post">
+        Query
+    </button>
+</form>
 <table class="table-hover table-bordered table-condensed">
     <thead>
         <tr>

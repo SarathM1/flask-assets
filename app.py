@@ -22,34 +22,6 @@ def index():
     return redirect(url_for('contacts'))
 
 
-@app.route('/filter', methods=['GET', 'POST'])
-def filter():
-    search = AssetSearchForm(request.form)
-    if request.method == 'POST':
-        # return search_results(search)
-        pass
-    return render_template('web/filter.html', form=search)
-
-
-# @app.route('/results')
-# def search_results(search):
-#     results = []
-#     search_string = search.data['search']
-#
-#     if search.data['search'] == '':
-#         qry = db_session.query(Album)
-#         results = qry.all()
-#
-#     if not results:
-#         flash('No results found!')
-#         return redirect('/')
-#     else:
-#         # display results
-#         table = Results(results)
-#         table.border = True
-#         return render_template('results.html', table=table)
-
-
 @app.route("/new_contact", methods=('GET', 'POST'))
 def new_contact():
     '''
@@ -97,27 +69,35 @@ def edit_contact(id):
         form=form)
 
 
-@app.route("/contacts")
+@app.route("/contacts", methods=['GET', 'POST'])
 def contacts():
     '''
     Show alls assets
     '''
     rows = Asset.query.order_by(Asset.name).all()
-    return render_template('web/contacts.html', rows=rows)
+    search_form = AssetSearchForm(request.form)
+    search_str = request.args.get('search')
+    search_field = request.args.get('select')
+    if search_field:
+        print(search_str, search_field)
+        if search_field == 'emp_no':
+            rows = Asset.query.filter(Asset.emp_no.contains(
+                search_str)).order_by(Asset.emp_no).all()
+        return render_template('web/contacts.html', rows=rows, search_form=search_form)
+    return render_template('web/contacts.html', rows=rows, search_form=search_form)
 
 
-@app.route("/search")
-def search():
-    '''
-    Search
-    '''
-    name_search = request.args.get('name')
-    rows = Asset.query.filter(
-        Asset.name.contains(name_search)
-    ).order_by(Asset.name).all()
-    print(rows)
-    return render_template('web/contacts.html', rows=rows)
-
+# @app.route("/search")
+# def search():
+#     '''
+#     Search
+#     '''
+#     name_search = request.args.get('name')
+#     rows = Asset.query.filter(
+#         Asset.name.contains(name_search)
+#     ).order_by(Asset.name).all()
+#     return render_template('web/contacts.html', rows=rows)
+#
 
 @app.route("/contacts/delete", methods=('POST',))
 def contacts_delete():
