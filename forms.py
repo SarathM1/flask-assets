@@ -20,13 +20,13 @@ class AssetSearchForm(FlaskForm):
                ('project_name', 'project_name'),
                ('won_no', 'won_no')]
     select = SelectField('Search for:', choices=choices)
-    search = StringField('')
+    search = StringField('Seach text:')
     allocation_date = BooleanField('allocation_date')
     return_date = BooleanField('return_date')
-    allocation_from_date = DateField('allocation_from_date')
-    allocation_to_date = DateField('allocation_to_date')
-    end_from_date = DateField('end_from_date')
-    end_to_date = DateField('end_to_date')
+    allocation_from_date = DateField('from')
+    allocation_to_date = DateField('to')
+    end_from_date = DateField('from')
+    end_to_date = DateField('to')
     submit = SubmitField("Query")
 
 

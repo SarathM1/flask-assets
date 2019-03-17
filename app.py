@@ -123,7 +123,6 @@ def assets():
     Show alls assets
     '''
     search_form = AssetSearchForm(request.form)
-    # print('validate: ', search_form.validate_on_submit())
     if request.method == 'POST':
         if search_form.validate() == False:
             flash('Validation Error')
