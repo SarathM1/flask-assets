@@ -44,8 +44,8 @@ def new_asset():
     return render_template('web/new_asset.html', form=form)
 
 
-@app.route("/edit_contact/<id>", methods=('GET', 'POST'))
-def edit_contact(id):
+@app.route("/edit_asset/<id>", methods=('GET', 'POST'))
+def edit_asset(id):
     '''
     Edit asset
 
@@ -65,7 +65,7 @@ def edit_contact(id):
             db.session.rollback()
             flash('Error update asset.', 'danger')
     return render_template(
-        'web/edit_contact.html',
+        'web/edit_asset.html',
         form=form)
 
 
