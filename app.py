@@ -123,16 +123,28 @@ def assets():
     Show alls assets
     '''
     search_form = AssetSearchForm(request.form)
-    search_str = request.args.get('search')
-    search_field = request.args.get('select')
-    if search_str:
-        results = query_db(search_str, search_field)
-        flash('results found: {}'.format(len(results)))
-        return render_template('web/assets.html', rows=results, search_form=search_form)
-    else:
-        # If 'search' field is empty, return all results
+    # print('validate: ', search_form.validate_on_submit())
+    if request.method == 'POST':
+        if search_form.validate() == False:
+            flash('Validation Error')
+            return render_template('web/assets.html', rows=[], search_form=search_form)
+        else:
+            search_str = search_form.search.data
+            search_field = search_form.select.data
+            rows = query_db(search_str, search_field)
+            print(rows)
+            return render_template('web/assets.html', rows=rows, search_form=search_form)
+    elif request.method == 'GET':
         results = Asset.query.order_by(Asset.name).all()
-    return render_template('web/assets.html', rows=results, search_form=search_form)
+        return render_template('web/assets.html', rows=results, search_form=search_form)
+    # if search_str:
+    #     results = query_db(search_str, search_field)
+    #     flash('results found: {}'.format(len(results)))
+    #     return render_template('web/assets.html', rows=results, search_form=search_form)
+    # else:
+    #     # If 'search' field is empty, return all results
+    #     results = Asset.query.order_by(Asset.name).all()
+    # return render_template('web/assets.html', rows=results, search_form=search_form)
 
 
 @app.route("/assets/delete", methods=('POST',))

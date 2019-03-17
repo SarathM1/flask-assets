@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SelectField, Form
+from wtforms import StringField, IntegerField, SelectField, BooleanField, SubmitField
 from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Email, Length, optional
 
 
-class AssetSearchForm(Form):
+class AssetSearchForm(FlaskForm):
     choices = [('name', 'name'),
                ('emp_no', 'emp_no'),
                ('location', 'location'),
@@ -21,6 +21,13 @@ class AssetSearchForm(Form):
                ('won_no', 'won_no')]
     select = SelectField('Search for:', choices=choices)
     search = StringField('')
+    allocation_date = BooleanField('allocation_date')
+    return_date = BooleanField('return_date')
+    allocation_from_date = DateField('allocation_from_date')
+    allocation_to_date = DateField('allocation_to_date')
+    end_from_date = DateField('end_from_date')
+    end_to_date = DateField('end_to_date')
+    submit = SubmitField("Query")
 
 
 class AssetForm(FlaskForm):

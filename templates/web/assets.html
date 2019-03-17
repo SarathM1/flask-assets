@@ -2,11 +2,8 @@
 {% block title %}View{% endblock %}
 {% block body %}
 <h1>Assets</h1>
-<form method="get">
+<form method="post">
     {{ generate_fields(search_form) }}
-    <button type="submit" class="btn btn-default" value="Query" method="post">
-        Query
-    </button>
 </form>
 {% if rows%}
 <table class="table-hover table-bordered table-condensed">
