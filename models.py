@@ -31,4 +31,4 @@ class Asset(db.Model):
     end_date = db.Column(db.Date(), nullable=True, unique=False)
 
     def __repr__(self):
-        return '<Contacts %r>' % self.name
+        return '<Assets %r>' % self.name
