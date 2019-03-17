@@ -135,7 +135,7 @@ def assets():
     return render_template('web/assets.html', rows=results, search_form=search_form)
 
 
-@app.route("/contacts/delete", methods=('POST',))
+@app.route("/assets/delete", methods=('POST',))
 def assets_delete():
     '''
     Delete asset
