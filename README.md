@@ -1,8 +1,8 @@
 # Flask assets
 
-## Use
+## Python libraries
 
-* Flask (Obvious!)
+* Flask
 * Flask-SQLAlchemy (ORM for database)
 * Flask-WTF (Generation of forms and validations)
 * Faker (Generates fake data)
