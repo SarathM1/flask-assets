@@ -19,7 +19,7 @@ def index():
     '''
     Home page
     '''
-    return redirect(url_for('contacts'))
+    return redirect(url_for('assets'))
 
 
 @app.route("/new_contact", methods=('GET', 'POST'))
@@ -36,7 +36,7 @@ def new_contact():
             db.session.commit()
             # User info
             flash('Asset created correctly', 'success')
-            return redirect(url_for('contacts'))
+            return redirect(url_for('assets'))
         except:
             db.session.rollback()
             flash('Error generating asset.', 'danger')
@@ -117,8 +117,8 @@ def query_db(search_str, search_field):
     return results
 
 
-@app.route("/contacts", methods=['GET', 'POST'])
-def contacts():
+@app.route("/assets", methods=['GET', 'POST'])
+def assets():
     '''
     Show alls assets
     '''
@@ -127,31 +127,29 @@ def contacts():
     search_field = request.args.get('select')
     if search_str:
         results = query_db(search_str, search_field)
-        flash('{} results found'.format(len(results)))
-        if not results:
-            flash('No results found')
-        return render_template('web/contacts.html', rows=results, search_form=search_form)
+        flash('results found: {}'.format(len(results)))
+        return render_template('web/assets.html', rows=results, search_form=search_form)
     else:
         # If 'search' field is empty, return all results
         results = Asset.query.order_by(Asset.name).all()
-    return render_template('web/contacts.html', rows=results, search_form=search_form)
+    return render_template('web/assets.html', rows=results, search_form=search_form)
 
 
 @app.route("/contacts/delete", methods=('POST',))
-def contacts_delete():
+def assets_delete():
     '''
     Delete asset
     '''
     try:
-        mi_contacto = Asset.query.filter_by(id=request.form['id']).first()
-        db.session.delete(mi_contacto)
+        result_row = Asset.query.filter_by(id=request.form['id']).first()
+        db.session.delete(result_row)
         db.session.commit()
         flash('Deleted successfully.', 'danger')
     except:
         db.session.rollback()
         flash('Error deleting  asset.', 'danger')
 
-    return redirect(url_for('contacts'))
+    return redirect(url_for('assets'))
 
 
 if __name__ == "__main__":
