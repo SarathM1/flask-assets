@@ -29,9 +29,9 @@ def new_asset():
     '''
     form = ContactForm()
     if form.validate_on_submit():
-        my_contact = Asset()
-        form.populate_obj(my_contact)
-        db.session.add(my_contact)
+        my_asset = Asset()
+        form.populate_obj(my_asset)
+        db.session.add(my_asset)
         try:
             db.session.commit()
             # User info
@@ -51,13 +51,13 @@ def edit_asset(id):
 
     :param id: Id from asset
     '''
-    my_contact = Asset.query.filter_by(id=id).first()
-    form = ContactForm(obj=my_contact)
+    my_asset = Asset.query.filter_by(id=id).first()
+    form = ContactForm(obj=my_asset)
     if form.validate_on_submit():
         try:
             # Update asset
-            form.populate_obj(my_contact)
-            db.session.add(my_contact)
+            form.populate_obj(my_asset)
+            db.session.add(my_asset)
             db.session.commit()
             # User info
             flash('Saved successfully', 'success')
