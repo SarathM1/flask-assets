@@ -22,8 +22,8 @@ def index():
     return redirect(url_for('assets'))
 
 
-@app.route("/new_contact", methods=('GET', 'POST'))
-def new_contact():
+@app.route("/new_asset", methods=('GET', 'POST'))
+def new_asset():
     '''
     Create new asset
     '''
@@ -41,7 +41,7 @@ def new_contact():
             db.session.rollback()
             flash('Error generating asset.', 'danger')
 
-    return render_template('web/new_contact.html', form=form)
+    return render_template('web/new_asset.html', form=form)
 
 
 @app.route("/edit_contact/<id>", methods=('GET', 'POST'))
