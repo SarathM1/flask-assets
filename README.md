@@ -1,9 +1,5 @@
 # Flask assets
 
-[DEMO](https://flaskassets.herokuapp.com/)
-
-![alls](https://github.com/tanrax/flask-assets/raw/master/screenshots/alls.jpg)
-
 ## Use
 
 * Flask (Obvious!)
@@ -32,11 +28,3 @@ sudo apt install sqliteman sqlite3
 ```bash
 python3 app.py
 ```
-
-## Screenshots
-
-![delete](https://github.com/tanrax/flask-assets/raw/master/screenshots/delete.jpg)
-![edit](https://github.com/tanrax/flask-assets/raw/master/screenshots/edit.jpg)
-![message](https://github.com/tanrax/flask-assets/raw/master/screenshots/message.jpg)
-![new](https://github.com/tanrax/flask-assets/raw/master/screenshots/new.jpg)
-![search](https://github.com/tanrax/flask-assets/raw/master/screenshots/search.jpg)
