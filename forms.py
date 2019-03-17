@@ -22,7 +22,7 @@ class AssetSearchForm(Form):
     search = StringField('')
 
 
-class ContactForm(FlaskForm):
+class AssetForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), Length(
         min=-1, max=80, message='length must be less than 80 chars')])
     emp_no = IntegerField('emp_no', validators=[DataRequired()])

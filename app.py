@@ -1,6 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request, flash
 from models import db, Asset
-from forms import ContactForm, AssetSearchForm
+from forms import AssetForm, AssetSearchForm
 
 # Flask
 app = Flask(__name__)
@@ -27,7 +27,7 @@ def new_asset():
     '''
     Create new asset
     '''
-    form = ContactForm()
+    form = AssetForm()
     if form.validate_on_submit():
         my_asset = Asset()
         form.populate_obj(my_asset)
@@ -52,7 +52,7 @@ def edit_asset(id):
     :param id: Id from asset
     '''
     my_asset = Asset.query.filter_by(id=id).first()
-    form = ContactForm(obj=my_asset)
+    form = AssetForm(obj=my_asset)
     if form.validate_on_submit():
         try:
             # Update asset
